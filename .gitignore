@@ -1,0 +1,56 @@
+# Environment
+.env
+*.env.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+.venv/
+venv/
+
+# UV
+.python-version
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Secrets
+credentials.json
+token.json
+*.pem
+*.key
+
+# Logs (keep structure, ignore content)
+bronze/vault/Logs/*.json
+silver/vault/Logs/*.json
+
+# Gmail OAuth tokens and credentials
+*gmail_credentials.json
+*gmail_token.json
+silver/.gmail_processed_ids.json
+
+# LinkedIn Playwright session (contains login cookies — never commit)
+silver/.linkedin_session/
+silver/.linkedin_processed_ids.json
+silver/.linkedin_pending_posts.json
+
+# WhatsApp sessions
+whatsapp_session/
+
+# Temporary
+*.tmp
+*.bak
