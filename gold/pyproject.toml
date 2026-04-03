@@ -1,0 +1,29 @@
+[project]
+name = "ai-employee-gold"
+version = "1.0.0"
+description = "Personal AI Employee - Gold Tier: Autonomous Employee (Odoo ERP + Meta Social)"
+requires-python = ">=3.13"
+dependencies = [
+    "watchdog>=6.0.0",
+    "python-dotenv>=1.1.0",
+    "pyyaml>=6.0.2",
+    "google-api-python-client>=2.150.0",
+    "google-auth-httplib2>=0.2.0",
+    "google-auth-oauthlib>=1.2.0",
+    "beautifulsoup4>=4.12.0",
+    "playwright>=1.48.0",
+    "requests>=2.32.0",
+]
+
+[project.scripts]
+ai-employee = "src.main:main"
+ai-employee-orchestrator = "orchestrator:main"
+setup-gmail-auth = "setup_gmail_auth:main"
+setup-linkedin-session = "setup_linkedin_session:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

@@ -1,0 +1,19 @@
+{
+  "name": "meta-social-mcp",
+  "version": "1.0.0",
+  "description": "MCP server for Facebook and Instagram (Meta Graph API) integration",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "node-fetch": "^3.3.2",
+    "form-data": "^4.0.1"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "odoo-mcp",
+  "version": "1.0.0",
+  "description": "MCP server for Odoo Community ERP integration via JSON-RPC API",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "node-fetch": "^3.3.2",
+    "dotenv": "^16.4.5"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

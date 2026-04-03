@@ -1,0 +1,107 @@
+# version: "3.8"
+
+# =============================================================================
+# AI Employee Gold Tier — Docker Compose
+# Services: PostgreSQL 15 + Odoo 17 Community
+#
+# Usage:
+#   docker compose up -d              # start all services
+#   docker compose down               # stop all services
+#   docker compose logs -f odoo       # follow Odoo logs
+#   docker compose logs -f db         # follow PostgreSQL logs
+#   docker compose restart odoo       # restart Odoo only
+#   docker compose down -v            # stop + wipe all data (fresh start)
+# =============================================================================
+
+services:
+
+  # ---------------------------------------------------------------------------
+  # PostgreSQL 15 — Odoo's database backend
+  # ---------------------------------------------------------------------------
+  db:
+    image: postgres:15
+    container_name: ai_employee_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: postgres          # default db (Odoo manages its own)
+      POSTGRES_USER: odoo
+      POSTGRES_PASSWORD: odoo_pass
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"                  # expose for local tools (DBeaver, etc.)
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U odoo"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ---------------------------------------------------------------------------
+  # Odoo 17 Community — ERP & Accounting
+  # ---------------------------------------------------------------------------
+  odoo:
+    image: odoo:17.0
+    container_name: ai_employee_odoo
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy   # wait for PostgreSQL to be ready
+    ports:
+      - "8069:8069"                  # main web interface
+      - "8072:8072"                  # live chat / longpolling
+    environment:
+      HOST: db
+      USER: odoo
+      PASSWORD: odoo_pass
+    volumes:
+      - odoo_data:/var/lib/odoo
+      - ./docker/odoo.conf:/etc/odoo/odoo.conf:ro
+      - ./docker/addons:/mnt/extra-addons   # custom addons (empty for now)
+    command: >
+      odoo
+      --config=/etc/odoo/odoo.conf
+      --database=odoo_ai_employee
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:8069/web/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+      start_period: 60s
+
+  # ---------------------------------------------------------------------------
+  # Odoo DB Initializer — runs once to install accounting modules
+  # Exits after init; Odoo service takes over
+  # ---------------------------------------------------------------------------
+  odoo-init:
+    image: odoo:17.0
+    container_name: ai_employee_odoo_init
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      HOST: db
+      USER: odoo
+      PASSWORD: odoo_pass
+    volumes:
+      - odoo_data:/var/lib/odoo
+      - ./docker/odoo.conf:/etc/odoo/odoo.conf:ro
+      - ./docker/addons:/mnt/extra-addons
+    command: >
+      odoo
+      --config=/etc/odoo/odoo.conf
+      --database=odoo_ai_employee
+      --init=base,account,account_accountant,account_payment
+      --without-demo=all
+      --stop-after-init
+    profiles:
+      - init                         # only runs with: docker compose --profile init up
+
+# =============================================================================
+# Volumes — persisted across container restarts
+# =============================================================================
+volumes:
+  postgres_data:
+    name: ai_employee_postgres_data
+  odoo_data:
+    name: ai_employee_odoo_data

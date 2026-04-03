@@ -1,0 +1,16 @@
+[
+  {
+    "timestamp": "2026-04-03T22:54:14.486545+00:00",
+    "action": "meta_social_draft",
+    "target": "facebook + instagram",
+    "details": {
+      "topic": "AI Employee Gold Tier launch announcement",
+      "facebook_plan": "PLAN_meta_facebook_20260404.md",
+      "instagram_plan": "PLAN_meta_instagram_20260404.md",
+      "facebook_approval": "META_FACEBOOK_6a0c5de5.md",
+      "instagram_approval": "META_INSTAGRAM_366e581c.md"
+    },
+    "approval_status": "pending",
+    "result": "drafts_created"
+  }
+]

@@ -1,6 +1,7 @@
 # Environment
 .env
 *.env.local
+.linkedin_session
 
 # Python
 __pycache__/
@@ -50,6 +51,9 @@ silver/.linkedin_pending_posts.json
 
 # WhatsApp sessions
 whatsapp_session/
+
+# Node
+node_modules/
 
 # Temporary
 *.tmp

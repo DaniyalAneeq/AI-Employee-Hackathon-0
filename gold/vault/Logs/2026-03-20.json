@@ -1,0 +1,64 @@
+[
+  {
+    "timestamp": "2026-03-20T17:21:09.334263+00:00",
+    "action_type": "odoo_list_open_invoices",
+    "actor": "claude_code / odoo-accountant",
+    "parameters": {
+      "count": 1,
+      "invoices": [
+        {
+          "id": 1,
+          "name": "INV/2026/00001",
+          "customer": "Acme Corp",
+          "amount_due": 2500.0
+        }
+      ]
+    },
+    "approval_status": "auto_approved",
+    "result": "success"
+  },
+  {
+    "timestamp": "2026-03-20T17:26:20Z",
+    "action_type": "odoo_get_balance_sheet",
+    "actor": "claude_code / odoo-accountant",
+    "parameters": {
+      "period": "March 2026 MTD"
+    },
+    "approval_status": "auto_approved",
+    "result": "success",
+    "output_file": "vault/Briefings/2026-03-20_Financial_Summary.md"
+  },
+  {
+    "timestamp": "2026-03-20T17:30:27Z",
+    "action_type": "odoo_hitl_triggered",
+    "actor": "claude_code / odoo-accountant",
+    "parameters": {
+      "customer": "Acme Corp",
+      "amount": 1500.0,
+      "description": "AI Employee Gold Tier setup \u2014 March 2026"
+    },
+    "approval_status": "pending_human",
+    "result": "approval_file_written",
+    "approval_file": "Pending_Approval/ODOO_invoice_776258a8.md",
+    "plan_file": "Plans/PLAN_odoo_invoice_Acme_Corp_20260320.md",
+    "hitl_reason": "Invoice > $100 \u2014 human approval required"
+  },
+  {
+    "timestamp": "2026-03-20T17:35:00Z",
+    "action_type": "odoo_create_invoice",
+    "actor": "claude_code / odoo-accountant",
+    "target": "Acme Corp",
+    "parameters": {
+      "customer": "Acme Corp",
+      "amount": 1500.0,
+      "description": "AI Employee Gold Tier setup \u2014 March 2026",
+      "invoice_id": 2,
+      "invoice_number": "INV/2026/00002"
+    },
+    "approval_status": "human_approved",
+    "approved_by": "human",
+    "approval_file": "ODOO_invoice_776258a8.md",
+    "result": "success",
+    "odoo_url": "http://localhost:8069/odoo/accounting/customer-invoices/2"
+  }
+]
