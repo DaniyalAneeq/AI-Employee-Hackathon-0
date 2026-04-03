@@ -1,0 +1,32 @@
+{
+  "mcpServers": {
+    "odoo-mcp": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "/mnt/d/AI/projects/GIAIC_HACKATHONS/Hackathon-0-AI-Employee-main/gold/mcp-servers/odoo-mcp/index.js"
+      ],
+      "env": {
+        "ODOO_URL": "http://localhost:8069",
+        "ODOO_DB": "odoo_ai_employee",
+        "ODOO_USER": "admin",
+        "ODOO_PASSWORD": "admin",
+        "DRY_RUN": "false"
+      }
+    },
+    "meta-social-mcp": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "/mnt/d/AI/projects/GIAIC_HACKATHONS/Hackathon-0-AI-Employee-main/gold/mcp-servers/meta-social-mcp/index.js"
+      ],
+      "env": {
+        "META_PAGE_ID": "",
+        "META_PAGE_ACCESS_TOKEN": "",
+        "META_IG_USER_ID": "",
+        "META_GRAPH_API_VERSION": "v19.0",
+        "DRY_RUN": "false"
+      }
+    }
+  }
+}

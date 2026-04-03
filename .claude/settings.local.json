@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(uv run:*)",
+      "Bash(mkdir -p /mnt/d/AI/projects/GIAIC_HACKATHONS/Hackathon-0-AI-Employee-main/gold/mcp-servers/odoo-mcp)",
+      "Bash(mkdir -p /mnt/d/AI/projects/GIAIC_HACKATHONS/Hackathon-0-AI-Employee-main/gold/mcp-servers/meta-social-mcp)",
+      "Bash(mkdir -p /mnt/d/AI/projects/GIAIC_HACKATHONS/Hackathon-0-AI-Employee-main/gold/scripts)",
+      "Bash(mkdir -p /mnt/d/AI/projects/GIAIC_HACKATHONS/Hackathon-0-AI-Employee-main/gold/vault/Accounting/Odoo)",
+      "Bash(mkdir -p /mnt/d/AI/projects/GIAIC_HACKATHONS/Hackathon-0-AI-Employee-main/.claude/skills/odoo-accountant)",
+      "Bash(timeout 3 node index.js)",
+      "Read(//tmp/**)"
+    ]
+  }
+}
